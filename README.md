@@ -1,5 +1,6 @@
 # QuestDemics: AI Operating System for Skill Mastery
 # MVP: https://questdemics.netlify.app/
+( Fill the dummy Login Details to access it )
 > *"This isn't a learning platform with AI. It's an AI operating system that orchestrates the learning platform."*
 
 QuestDemics is an intelligent, autonomous learning agent and RPG progression system modeled like "Solo Leveling." The learner acts as a **Hunter** progressing toward mastery, and the AI serves as **The System**—continuously observing, reasoning, adapting, and intervening to guide the Hunter from novice to master.
