@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+@theme {
+  --color-rpg-bg: #020712;
+  --color-rpg-dark: #040e22;
+  --color-rpg-card: #061833;
+  --color-rpg-cardLight: #0b254b;
+  --color-rpg-border: #0e3b6c;
+  --color-rpg-borderLight: #165b9f;
+  --color-rpg-gold: #00e5ff; /* Cyan glow */
+  --color-rpg-goldLight: #a2f7ff;
+  --color-rpg-xp: #00a2ff;
+  --color-rpg-health: #ef4444;
+  --color-rpg-mana: #a855f7;
+  --color-rpg-rankE: #64748b;
+  --color-rpg-rankD: #06b6d4;
+  --color-rpg-rankC: #3b82f6;
+  --color-rpg-rankB: #8b5cf6;
+  --color-rpg-rankA: #f59e0b;
+  --color-rpg-rankS: #ef4444;
+  
+  --font-sans: "Orbitron", "Outfit", "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --shadow-rpg-glow: 0 0 15px rgba(0, 229, 255, 0.45);
+  --shadow-xp-glow: 0 0 10px rgba(0, 162, 255, 0.5);
+  --shadow-rank-glow: 0 0 20px rgba(0, 229, 255, 0.6);
+}
+
+body {
+  margin: 0;
+  background-color: #020712;
+  color: #e2e8f0;
+  font-family: 'Orbitron', 'Outfit', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar for Cyber HUD */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020712;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0e3b6c;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00e5ff;
+  box-shadow: 0 0 8px #00e5ff;
+}
+
+/* Futuristic Holographic Grid Background & Scanlines */
+.holo-bg {
+  position: relative;
+  background-color: #020712;
+  background-image: 
+    linear-gradient(rgba(0, 229, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.02) 1px, transparent 1px);
+  background-size: 25px 25px;
+}
+
+.holo-bg::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 229, 255, 0.04) 50%);
+  z-index: 9999;
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+/* Hologram Scanning Line animation */
+@keyframes scanning {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.holo-scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 229, 255, 0.2), transparent);
+  animation: scanning 10s linear infinite;
+  pointer-events: none;
+  z-index: 10000;
+}
+
+/* Neon Text Glow Utilities */
+.holo-text {
+  color: #ffffff;
+  text-shadow: 
+    0 0 4px rgba(0, 229, 255, 0.6),
+    0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+.holo-text-cyan {
+  color: #00e5ff;
+  text-shadow: 
+    0 0 6px rgba(0, 229, 255, 0.8),
+    0 0 15px rgba(0, 229, 255, 0.4),
+    0 0 25px rgba(0, 229, 255, 0.2);
+}
+
+/* Cyber Corner Bracket Panels */
+.holo-panel {
+  position: relative;
+  background: rgba(4, 14, 34, 0.8);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.1), inset 0 0 8px rgba(0, 229, 255, 0.05);
+  backdrop-filter: blur(8px);
+}
+
+.holo-panel::before {
+  content: "";
+  position: absolute;
+  top: -2px; left: -2px;
+  width: 12px; height: 12px;
+  border-top: 3px solid #00e5ff;
+  border-left: 3px solid #00e5ff;
+}
+
+.holo-panel::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; right: -2px;
+  width: 12px; height: 12px;
+  border-bottom: 3px solid #00e5ff;
+  border-right: 3px solid #00e5ff;
+}
+
+/* Double corner bracket support */
+.holo-panel-brackets::before {
+  content: "";
+  position: absolute;
+  top: -2px; right: -2px;
+  width: 12px; height: 12px;
+  border-top: 3px solid #00e5ff;
+  border-right: 3px solid #00e5ff;
+}
+
+.holo-panel-brackets::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; left: -2px;
+  width: 12px; height: 12px;
+  border-bottom: 3px solid #00e5ff;
+  border-left: 3px solid #00e5ff;
+}
+
+/* Hologram flicker keyframes */
+@keyframes holoFlicker {
+  0%, 100% { opacity: 0.99; }
+  23% { opacity: 0.99; }
+  24% { opacity: 0.88; }
+  26% { opacity: 0.99; }
+  45% { opacity: 0.99; }
+  46% { opacity: 0.9; }
+  47% { opacity: 0.99; }
+  72% { opacity: 0.99; }
+  73% { opacity: 0.85; }
+  75% { opacity: 0.99; }
+}
+
+.holo-flicker {
+  animation: holoFlicker 6s infinite;
+}
+
+/* Solo Leveling Blue System Warning Dialog */
+.system-warning-hud {
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.15), inset 0 0 10px rgba(239, 68, 68, 0.05);
+}
+
+.system-warning-hud::before {
+  border-top: 3px solid #ef4444;
+  border-left: 3px solid #ef4444;
+}
+
+.system-warning-hud::after {
+  border-bottom: 3px solid #ef4444;
+  border-right: 3px solid #ef4444;
+}
+
+/* Glassmorphism custom fallback override */
+.rpg-glass {
+  background: rgba(4, 14, 34, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.rpg-glow-gold {
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+}
+
+.rpg-glow-purple {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
+}
+
+.rpg-glow-srank {
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.4);
+  border-color: rgba(239, 68, 68, 0.6);
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(0, 229, 255, 0.2); }
+  50% { border-color: rgba(0, 229, 255, 0.6); }
+}
+
+.status-glow-animation {
+  animation: borderGlow 4s infinite;
+}
